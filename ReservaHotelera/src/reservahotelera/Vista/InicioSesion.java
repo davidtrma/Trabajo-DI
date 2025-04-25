@@ -52,6 +52,8 @@ public class InicioSesion extends javax.swing.JInternalFrame {
 
         jMenu5.setText("jMenu5");
 
+        setForeground(new java.awt.Color(153, 204, 255));
+
         jLabel1.setFont(new java.awt.Font("Times New Roman", 3, 36)); // NOI18N
         jLabel1.setText("Inicio Sesion");
 
@@ -72,6 +74,7 @@ public class InicioSesion extends javax.swing.JInternalFrame {
 
         jMenu4.setText("Ayuda");
 
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem1.setText("Contacto");
         jMenu4.add(jMenuItem1);
 
