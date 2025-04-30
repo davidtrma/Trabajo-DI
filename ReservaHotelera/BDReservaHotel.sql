@@ -1,10 +1,13 @@
+CREATE DATABASE IF NOT EXISTS BDReservaHotel;
+
+USE BDReservaHotel;
+
 CREATE TABLE clientes (
     id_cliente INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100),
     dni VARCHAR(15) UNIQUE,
     email VARCHAR(100),
     telefono VARCHAR(20),
-    fecha_alta DATE,
     usuario VARCHAR(50) UNIQUE,
     contraseña VARCHAR(100)
 );
@@ -33,14 +36,14 @@ CREATE TABLE reservas (
     id_cliente INT,
     id_habitacion INT,
     fecha DATE,
-    hora TIME,
     FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente),
     FOREIGN KEY (id_habitacion) REFERENCES habitaciones(id_habitacion)
 );
 
 CREATE TABLE servicios (
     id_servicio INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100)
+    nombre VARCHAR(100),
+    precio DECIMAL (10,2)
 );
 
 
@@ -82,10 +85,9 @@ INSERT INTO stock (id_hotel, producto, cantidad) VALUES
 (1, 'Cepillos de dientes', 50);
 
 
-INSERT INTO servicios (nombre) VALUES
-('Limpieza diaria'),
-('Comida buffet'),
-('Wi-Fi gratuito'),
-('Spa y masajes'),
-('Servicio a la habitación');
-
+INSERT INTO servicios (nombre , precio) VALUES
+('Limpieza diaria',10.00 ),
+('Comida buffet' , 10.00),
+('Wi-Fi gratuito' , 1.00),
+('Spa y masajes' , 25.00),
+('Servicio a la habitación , 15.00');

@@ -36,8 +36,8 @@ public class ReservaHotelera extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        MenuBarNuevaReserva = new javax.swing.JMenuItem();
+        MenuBarConsultaReservas = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -58,11 +58,11 @@ public class ReservaHotelera extends javax.swing.JFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 771, Short.MAX_VALUE)
+            .addGap(0, 1139, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 434, Short.MAX_VALUE)
+            .addGap(0, 589, Short.MAX_VALUE)
         );
 
         jMenu4.setText("Sesión");
@@ -85,12 +85,22 @@ public class ReservaHotelera extends javax.swing.JFrame {
         jMenu5.setText("Reserva");
         jMenu5.setToolTipText("Reserva");
 
-        jMenuItem6.setText("Reservar");
-        jMenuItem6.setToolTipText("Reserva");
-        jMenu5.add(jMenuItem6);
+        MenuBarNuevaReserva.setText("Reservar");
+        MenuBarNuevaReserva.setToolTipText("Reserva");
+        MenuBarNuevaReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuBarNuevaReservaActionPerformed(evt);
+            }
+        });
+        jMenu5.add(MenuBarNuevaReserva);
 
-        jMenuItem7.setText("Consultar Reservas");
-        jMenu5.add(jMenuItem7);
+        MenuBarConsultaReservas.setText("Consultar Reservas");
+        MenuBarConsultaReservas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuBarConsultaReservasActionPerformed(evt);
+            }
+        });
+        jMenu5.add(MenuBarConsultaReservas);
 
         jMenuBar1.add(jMenu5);
 
@@ -119,13 +129,15 @@ public class ReservaHotelera extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -134,6 +146,20 @@ public class ReservaHotelera extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void MenuBarNuevaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBarNuevaReservaActionPerformed
+        // TODO add your handling code here:
+        NuevaReserva nuevaReserva = new NuevaReserva();
+        jDesktopPane1.add(nuevaReserva);
+        nuevaReserva.setVisible(true);
+    }//GEN-LAST:event_MenuBarNuevaReservaActionPerformed
+
+    private void MenuBarConsultaReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBarConsultaReservasActionPerformed
+        // TODO add your handling code here:
+       MostrarReservas mostrarReservas = new MostrarReservas();
+       jDesktopPane1.add(mostrarReservas);
+       mostrarReservas.setVisible(true);
+    }//GEN-LAST:event_MenuBarConsultaReservasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,6 +200,8 @@ public class ReservaHotelera extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem MenuBarConsultaReservas;
+    private javax.swing.JMenuItem MenuBarNuevaReserva;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -187,7 +215,5 @@ public class ReservaHotelera extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     // End of variables declaration//GEN-END:variables
 }
