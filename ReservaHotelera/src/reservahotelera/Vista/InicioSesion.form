@@ -64,9 +64,13 @@
     </Menu>
   </NonVisualComponents>
   <Properties>
+    <Property name="closable" type="boolean" value="true"/>
     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="ff" green="cc" red="99" type="rgb"/>
     </Property>
+    <Property name="iconifiable" type="boolean" value="true"/>
+    <Property name="maximizable" type="boolean" value="true"/>
+    <Property name="resizable" type="boolean" value="true"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar2"/>
@@ -92,16 +96,16 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jPasswordField1" min="-2" pref="175" max="-2" attributes="0"/>
-                          <Component id="jTextField2" min="-2" pref="175" max="-2" attributes="0"/>
-                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
+                          <Component id="jPasswordFieldContrasena" min="-2" pref="175" max="-2" attributes="0"/>
+                          <Component id="jTextFieldUsuario" min="-2" pref="175" max="-2" attributes="0"/>
+                          <Component id="jLabelContraseña" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelIniciarSesion" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelUsuario" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonIniciarSesion" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="105" max="32767" attributes="0"/>
@@ -112,24 +116,24 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <Component id="jLabelIniciarSesion" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jLabel2" min="-2" pref="25" max="-2" attributes="0"/>
+              <Component id="jLabelUsuario" min="-2" pref="25" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTextField2" min="-2" pref="34" max="-2" attributes="0"/>
+              <Component id="jTextFieldUsuario" min="-2" pref="34" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+              <Component id="jLabelContraseña" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPasswordField1" min="-2" pref="32" max="-2" attributes="0"/>
+              <Component id="jPasswordFieldContrasena" min="-2" pref="32" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <Component id="jButtonIniciarSesion" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="25" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="jLabelIniciarSesion">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Times New Roman" size="36" style="3"/>
@@ -137,7 +141,7 @@
         <Property name="text" type="java.lang.String" value="Inicio Sesion"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="jLabelUsuario">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Times New Roman" size="18" style="1"/>
@@ -146,7 +150,7 @@
         <Property name="toolTipText" type="java.lang.String" value="Usuario"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
+    <Component class="javax.swing.JLabel" name="jLabelContrase&#xf1;a">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Times New Roman" size="18" style="1"/>
@@ -155,17 +159,17 @@
         <Property name="toolTipText" type="java.lang.String" value="Contrase&#xf1;a"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField2">
+    <Component class="javax.swing.JTextField" name="jTextFieldUsuario">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value="Usuario"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JPasswordField" name="jPasswordField1">
+    <Component class="javax.swing.JPasswordField" name="jPasswordFieldContrasena">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value="Contrase&#xf1;a"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="jButtonIniciarSesion">
       <Properties>
         <Property name="text" type="java.lang.String" value="Inicio Sesion"/>
         <Property name="toolTipText" type="java.lang.String" value="Inicio Sesion"/>

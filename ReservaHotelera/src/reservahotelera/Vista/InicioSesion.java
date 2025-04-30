@@ -8,13 +8,32 @@ package reservahotelera.Vista;
  *
  * @author a22angeldtm
  */
+import javax.swing.JOptionPane;
+import reservahotelera.Controlador.Controlador;
 public class InicioSesion extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form InicioSesion
      */
+    private Controlador controlador;
+    
     public InicioSesion() {
         initComponents();
+        
+        
+        jButtonIniciarSesion.addActionListener(e -> {
+            String usuario = jTextFieldUsuario.getText();
+            String contrasena = new String(jPasswordFieldContrasena.getPassword());
+            controlador.iniciarSesion(usuario, contrasena);
+        });
+    }
+    
+    public void setControlador (Controlador controlador){
+        this.controlador=controlador;
+    }
+    
+    public void mostrarMensaje(String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje);
     }
 
     /**
@@ -31,12 +50,12 @@ public class InicioSesion extends javax.swing.JInternalFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        jLabelIniciarSesion = new javax.swing.JLabel();
+        jLabelUsuario = new javax.swing.JLabel();
+        jLabelContraseña = new javax.swing.JLabel();
+        jTextFieldUsuario = new javax.swing.JTextField();
+        jPasswordFieldContrasena = new javax.swing.JPasswordField();
+        jButtonIniciarSesion = new javax.swing.JButton();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -52,25 +71,29 @@ public class InicioSesion extends javax.swing.JInternalFrame {
 
         jMenu5.setText("jMenu5");
 
+        setClosable(true);
         setForeground(new java.awt.Color(153, 204, 255));
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 3, 36)); // NOI18N
-        jLabel1.setText("Inicio Sesion");
+        jLabelIniciarSesion.setFont(new java.awt.Font("Times New Roman", 3, 36)); // NOI18N
+        jLabelIniciarSesion.setText("Inicio Sesion");
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel2.setText("Usuario");
-        jLabel2.setToolTipText("Usuario");
+        jLabelUsuario.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabelUsuario.setText("Usuario");
+        jLabelUsuario.setToolTipText("Usuario");
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel3.setText("Contraseña");
-        jLabel3.setToolTipText("Contraseña");
+        jLabelContraseña.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabelContraseña.setText("Contraseña");
+        jLabelContraseña.setToolTipText("Contraseña");
 
-        jTextField2.setToolTipText("Usuario");
+        jTextFieldUsuario.setToolTipText("Usuario");
 
-        jPasswordField1.setToolTipText("Contraseña");
+        jPasswordFieldContrasena.setToolTipText("Contraseña");
 
-        jButton1.setText("Inicio Sesion");
-        jButton1.setToolTipText("Inicio Sesion");
+        jButtonIniciarSesion.setText("Inicio Sesion");
+        jButtonIniciarSesion.setToolTipText("Inicio Sesion");
 
         jMenu4.setText("Ayuda");
 
@@ -94,31 +117,31 @@ public class InicioSesion extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(94, 94, 94)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jPasswordFieldContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelContraseña)
+                            .addComponent(jLabelIniciarSesion)
+                            .addComponent(jLabelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(121, 121, 121)
-                        .addComponent(jButton1)))
+                        .addComponent(jButtonIniciarSesion)))
                 .addContainerGap(105, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jLabelIniciarSesion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
+                .addComponent(jLabelContraseña)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPasswordFieldContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(jButtonIniciarSesion)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -127,10 +150,10 @@ public class InicioSesion extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton jButtonIniciarSesion;
+    private javax.swing.JLabel jLabelContraseña;
+    private javax.swing.JLabel jLabelIniciarSesion;
+    private javax.swing.JLabel jLabelUsuario;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -140,7 +163,7 @@ public class InicioSesion extends javax.swing.JInternalFrame {
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JPasswordField jPasswordFieldContrasena;
+    private javax.swing.JTextField jTextFieldUsuario;
     // End of variables declaration//GEN-END:variables
 }

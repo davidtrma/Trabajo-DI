@@ -90,4 +90,4 @@ INSERT INTO servicios (nombre , precio) VALUES
 ('Comida buffet' , 10.00),
 ('Wi-Fi gratuito' , 1.00),
 ('Spa y masajes' , 25.00),
-('Servicio a la habitación , 15.00');
+('Servicio a la habitación' , '15.00');

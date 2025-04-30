@@ -31,14 +31,14 @@ public class ReservaHotelera extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu4 = new javax.swing.JMenu();
+        jMenuSesión = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
+        jMenuReserva = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuAyuda = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
 
@@ -65,37 +65,47 @@ public class ReservaHotelera extends javax.swing.JFrame {
             .addGap(0, 434, Short.MAX_VALUE)
         );
 
-        jMenu4.setText("Sesión");
-        jMenu4.setToolTipText("Sesion");
+        jMenuSesión.setText("Sesión");
+        jMenuSesión.setToolTipText("Sesion");
 
         jMenuItem3.setText("Inicio Sesion");
         jMenuItem3.setToolTipText("Iniciar sesion");
-        jMenu4.add(jMenuItem3);
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenuSesión.add(jMenuItem3);
 
-        jMenuItem4.setText("Crear Sesion");
+        jMenuItem4.setText("Crear Usuario");
         jMenuItem4.setToolTipText("Crear sesion");
-        jMenu4.add(jMenuItem4);
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenuSesión.add(jMenuItem4);
 
         jMenuItem5.setText("Dar de alta");
         jMenuItem5.setToolTipText("Dar de alta");
-        jMenu4.add(jMenuItem5);
+        jMenuSesión.add(jMenuItem5);
 
-        jMenuBar1.add(jMenu4);
+        jMenuBar1.add(jMenuSesión);
 
-        jMenu5.setText("Reserva");
-        jMenu5.setToolTipText("Reserva");
+        jMenuReserva.setText("Reserva");
+        jMenuReserva.setToolTipText("Reserva");
 
         jMenuItem6.setText("Reservar");
         jMenuItem6.setToolTipText("Reserva");
-        jMenu5.add(jMenuItem6);
+        jMenuReserva.add(jMenuItem6);
 
         jMenuItem7.setText("Consultar Reservas");
-        jMenu5.add(jMenuItem7);
+        jMenuReserva.add(jMenuItem7);
 
-        jMenuBar1.add(jMenu5);
+        jMenuBar1.add(jMenuReserva);
 
-        jMenu2.setText("Ayuda");
-        jMenu2.setToolTipText("Ayuda");
+        jMenuAyuda.setText("Ayuda");
+        jMenuAyuda.setToolTipText("Ayuda");
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem2.setText("Contacto");
@@ -105,13 +115,13 @@ public class ReservaHotelera extends javax.swing.JFrame {
                 jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem2);
+        jMenuAyuda.add(jMenuItem2);
 
         jMenuItem1.setText("Acerca de");
         jMenuItem1.setToolTipText("Acerca de");
-        jMenu2.add(jMenuItem1);
+        jMenuAyuda.add(jMenuItem1);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(jMenuAyuda);
 
         setJMenuBar(jMenuBar1);
 
@@ -134,6 +144,20 @@ public class ReservaHotelera extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        CrearSesion ventana = new CrearSesion();
+        jDesktopPane1.add(ventana);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        InicioSesion inicioSesion = new InicioSesion();
+        jDesktopPane1.add(inicioSesion);
+        inicioSesion.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,10 +200,8 @@ public class ReservaHotelera extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenuAyuda;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
@@ -189,5 +211,7 @@ public class ReservaHotelera extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenu jMenuReserva;
+    private javax.swing.JMenu jMenuSesión;
     // End of variables declaration//GEN-END:variables
 }

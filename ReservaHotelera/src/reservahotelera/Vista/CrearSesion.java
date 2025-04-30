@@ -47,6 +47,10 @@ public class CrearSesion extends javax.swing.JInternalFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
 
         setBackground(new java.awt.Color(153, 204, 255));
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 3, 28)); // NOI18N
         jLabel1.setText("Crear Usuario");

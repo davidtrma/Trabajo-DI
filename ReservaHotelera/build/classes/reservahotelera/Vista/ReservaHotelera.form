@@ -22,7 +22,7 @@
     </Container>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="jMenu4">
+        <Menu class="javax.swing.JMenu" name="jMenuSesi&#xf3;n">
           <Properties>
             <Property name="text" type="java.lang.String" value="Sesi&#xf3;n"/>
             <Property name="toolTipText" type="java.lang.String" value="Sesion"/>
@@ -33,12 +33,18 @@
                 <Property name="text" type="java.lang.String" value="Inicio Sesion"/>
                 <Property name="toolTipText" type="java.lang.String" value="Iniciar sesion"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem3ActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Crear Sesion"/>
+                <Property name="text" type="java.lang.String" value="Crear Usuario"/>
                 <Property name="toolTipText" type="java.lang.String" value="Crear sesion"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem4ActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
               <Properties>
@@ -48,7 +54,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu5">
+        <Menu class="javax.swing.JMenu" name="jMenuReserva">
           <Properties>
             <Property name="text" type="java.lang.String" value="Reserva"/>
             <Property name="toolTipText" type="java.lang.String" value="Reserva"/>
@@ -67,7 +73,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu2">
+        <Menu class="javax.swing.JMenu" name="jMenuAyuda">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ayuda"/>
             <Property name="toolTipText" type="java.lang.String" value="Ayuda"/>
