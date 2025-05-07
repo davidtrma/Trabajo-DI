@@ -4,13 +4,23 @@ import java.time.LocalDate;
 
 public class Reserva {
 
+    private Integer idReserva;
     private int idCliente;
     private int idHabitacion;
     private LocalDate fechaEntrada;
     private LocalDate fechaSalida;
     private double precioTotal;
 
-    public Reserva(int idCliente, int idHabitacion, LocalDate fechaEntrada, LocalDate fechaSalida, double precioTotal) {
+    // Constructor para nueva reserva (sin ID)
+    public Reserva(Integer idCliente, Integer idHabitacion,
+                   LocalDate fechaEntrada, LocalDate fechaSalida, Double precioTotal) {
+        this(null, idCliente, idHabitacion, fechaEntrada, fechaSalida, precioTotal);
+    }
+
+    // Constructor completo (para modificación)
+    public Reserva(Integer idReserva, Integer idCliente, Integer idHabitacion,
+                   LocalDate fechaEntrada, LocalDate fechaSalida, Double precioTotal) {
+        this.idReserva = idReserva;
         this.idCliente = idCliente;
         this.idHabitacion = idHabitacion;
         this.fechaEntrada = fechaEntrada;
@@ -56,5 +66,13 @@ public class Reserva {
 
     public void setPrecioTotal(double precioTotal) {
         this.precioTotal = precioTotal;
+    }
+
+    public Integer getIdReserva() {
+        return idReserva;
+    }
+
+    public void setIdReserva(int idReserva) {
+        this.idReserva = idReserva;
     }
 }

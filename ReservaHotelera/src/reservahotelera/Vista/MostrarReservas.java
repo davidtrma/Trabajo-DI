@@ -4,19 +4,62 @@
  */
 package reservahotelera.Vista;
 
+import reservahotelera.Controlador.MostrarReservasControlador;
+import reservahotelera.Controlador.Singleton;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author andre rios martinez
  */
 public class MostrarReservas extends javax.swing.JInternalFrame {
 
+
     /**
      * Creates new form MostrarReservas
      */
+    private MostrarReservasControlador controlador;
     public MostrarReservas() {
         super("Reservas",true,true,false,true);
         initComponents();
+        configurarTablaNoEditable();
+        this.controlador = new MostrarReservasControlador(Singleton.getInstancia().getConexion());
+        cargarDatos();
     }
+
+    private void cargarDatos() {
+        jTable1.setModel(controlador.obtenerDatosReservas());
+    }
+
+    private void configurarTablaNoEditable() {
+        // Método 1: Usar un TableModel no editable
+        jTable1.setModel(new DefaultTableModel(
+                new Object[][]{},
+                new String[]{"Código Reserva", "Tamaño Habitación", "Tipo Habitación",
+                        "Fecha Entrada", "Fecha Salida", "Precio"}) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+
+        // Método 2: Eliminar los editores de celda
+        jTable1.setDefaultEditor(Object.class, null);
+
+        // Otras configuraciones útiles
+        jTable1.setRowSelectionAllowed(true); // Permitir selección de filas
+        jTable1.setColumnSelectionAllowed(false); // No permitir selección de columnas
+        jTable1.setCellSelectionEnabled(false); // No permitir selección de celdas individuales
+        jTable1.getTableHeader().setReorderingAllowed(false); // No permitir reordenar columnas
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,6 +74,10 @@ public class MostrarReservas extends javax.swing.JInternalFrame {
         jTable1 = new javax.swing.JTable();
         btnEliminarR = new javax.swing.JButton();
         btnModRe = new javax.swing.JButton();
+        btnMostrarServicios = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -40,7 +87,7 @@ public class MostrarReservas extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Cliente", "Tamaño Habitación", "Tipo Habitación", "Fecha Entrada", "Fecha Salida", "Precio"
+                "Código Reserva", "Tamaño Habitación", "Tipo Habitación", "Fecha Entrada", "Fecha Salida", "Precio"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -59,31 +106,62 @@ public class MostrarReservas extends javax.swing.JInternalFrame {
             }
         });
 
+        btnMostrarServicios.setText("Mostrar Servicios");
+        btnMostrarServicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMostrarServiciosActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/interrogante.png"))); // NOI18N
+        jLabel1.setToolTipText("Selecciona una reserva y presiona \"Eliminar\" para borrar dicha reserva.");
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/interrogante.png"))); // NOI18N
+        jLabel2.setToolTipText("Selecciona una reserva y presiona \"Modificar\" para editar la reserva.");
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/interrogante.png"))); // NOI18N
+        jLabel3.setToolTipText("Selecciona una reserva y presiona \"\"Mostrar Servicios\" para ver los servicios asociados a dicha reserva.");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(91, 91, 91)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnEliminarR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnModRe, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(96, Short.MAX_VALUE))
+                    .addComponent(btnModRe, javax.swing.GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE)
+                    .addComponent(btnMostrarServicios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEliminarR))
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEliminarR)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnModRe)
-                .addGap(18, 18, 18))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnModRe)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnMostrarServicios)
+                    .addComponent(jLabel3))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -91,16 +169,82 @@ public class MostrarReservas extends javax.swing.JInternalFrame {
 
     private void btnEliminarRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarRActionPerformed
         // TODO add your handling code here:
+        int filaSeleccionada = jTable1.getSelectedRow();
+        if (filaSeleccionada == -1) {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione una reserva para eliminar");
+            return;
+        }
+
+        int idReserva = (int) jTable1.getValueAt(filaSeleccionada, 0);
+        int confirmacion = JOptionPane.showConfirmDialog(
+                this,
+                "¿Está seguro de que desea eliminar la reserva con ID: " + idReserva + "?",
+                "Confirmar eliminación",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            if (controlador.eliminarReserva(idReserva)) {
+                JOptionPane.showMessageDialog(this, "Reserva eliminada con éxito");
+                cargarDatos(); // Refrescar la tabla
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al eliminar la reserva");
+            }
+        }
     }//GEN-LAST:event_btnEliminarRActionPerformed
 
     private void btnModReActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModReActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnModReActionPerformed
+        int filaSeleccionada = jTable1.getSelectedRow();
+        if (filaSeleccionada == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione una reserva para modificar");
+            return;
+        }
+
+        int idReserva = (int) jTable1.getValueAt(filaSeleccionada, 0);
+
+
+
+        // Crear y mostrar la ventana de modificación
+        NuevaReserva modificarReserva = new NuevaReserva(idReserva);
+
+        JDesktopPane desktop = getDesktopPane();
+        if (desktop != null) {
+            desktop.add(modificarReserva);
+        }
+
+        modificarReserva.setVisible(true);
+        modificarReserva.toFront();
+    }
+//GEN-LAST:event_btnModReActionPerformed
+
+    private void btnMostrarServiciosActionPerformed(java.awt.event.ActionEvent evt) {                                                    
+        // TODO add your handling code here:
+        int fila = jTable1.getSelectedRow();
+        if (fila == -1) return;
+
+        int idReserva = (int) jTable1.getValueAt(fila, 0);
+        List<String> servicios = controlador.obtenerServiciosReserva(idReserva);
+
+        String mensaje = servicios.isEmpty() ?
+                "No hay servicios asociados" :
+                "Servicios:\n- " + String.join("\n- ", servicios);
+
+        JOptionPane.showMessageDialog(this, mensaje, "Servicios Reserva #" + idReserva,
+                JOptionPane.INFORMATION_MESSAGE);
+    }
+
+
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEliminarR;
     private javax.swing.JButton btnModRe;
+    private javax.swing.JButton btnMostrarServicios;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

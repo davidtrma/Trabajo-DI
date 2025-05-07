@@ -4,6 +4,11 @@
  */
 package reservahotelera.Vista;
 
+import reservahotelera.Controlador.NuevaReservaControlador;
+import reservahotelera.Controlador.Singleton;
+
+import java.sql.Connection;
+
 /**
  *
  * @author a22angeldtm
@@ -58,11 +63,11 @@ public class ReservaHotelera extends javax.swing.JFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1139, Short.MAX_VALUE)
+            .addGap(0, 1225, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 589, Short.MAX_VALUE)
+            .addGap(0, 640, Short.MAX_VALUE)
         );
 
         jMenu4.setText("Sesión");
@@ -129,15 +134,11 @@ public class ReservaHotelera extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jDesktopPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jDesktopPane1)
         );
 
         pack();
@@ -149,7 +150,18 @@ public class ReservaHotelera extends javax.swing.JFrame {
 
     private void MenuBarNuevaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBarNuevaReservaActionPerformed
         // TODO add your handling code here:
+        // Obtener la conexión desde el Singleton
+        Connection conexion = Singleton.getInstancia().getConexion();
+
+        // Crear la vista
         NuevaReserva nuevaReserva = new NuevaReserva();
+
+        // Crear el controlador con la vista y la conexión
+        NuevaReservaControlador controlador = new NuevaReservaControlador
+
+                (nuevaReserva, conexion);
+
+        // Mostrar la vista en el JDesktopPane
         jDesktopPane1.add(nuevaReserva);
         nuevaReserva.setVisible(true);
     }//GEN-LAST:event_MenuBarNuevaReservaActionPerformed

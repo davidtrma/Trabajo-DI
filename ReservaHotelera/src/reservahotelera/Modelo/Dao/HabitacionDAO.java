@@ -11,7 +11,7 @@ public class HabitacionDAO {
         this.conn = conn;
     }
 
-    public List<String> obtenerTamaños() throws SQLException {
+    public List<String> obtenerTamanhos() throws SQLException {
         Set<String> tamanhos = new HashSet<>();
         String sql = "SELECT DISTINCT tamaño FROM habitaciones";
         ResultSet rs = conn.createStatement().executeQuery(sql);
@@ -52,4 +52,25 @@ public class HabitacionDAO {
         }
         return null;
     }
+
+    public Habitacion obtenerHabitacionPorId(int idHabitacion) throws SQLException {
+        String sql = "SELECT id_habitacion, numero, tamaño, calidad, precio FROM habitaciones WHERE id_habitacion = ?";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idHabitacion);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return new Habitacion(
+                        rs.getInt("id_habitacion"),
+                        rs.getString("numero"),
+                        rs.getString("tamaño"),
+                        rs.getString("calidad"),
+                        rs.getDouble("precio")
+                );
+            }
+            return null;
+        }
+    }
+
 }

@@ -4,6 +4,14 @@
  */
 package reservahotelera.Vista;
 
+import reservahotelera.Controlador.NuevaReservaControlador;
+import reservahotelera.Controlador.Singleton;
+
+import javax.swing.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author andre rios martinez
@@ -13,9 +21,47 @@ public class NuevaReserva extends javax.swing.JInternalFrame {
     /**
      * Creates new form NuevaReserva
      */
+    /*
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JLabel labelPrecio;
+    private com.toedter.calendar.JDateChooser dateEntrada;
+    private com.toedter.calendar.JDateChooser dateSalida;
+    */
+
+    private NuevaReservaControlador controlador;
+
+    // Constructor original (sin parámetros)
     public NuevaReserva() {
-        super("Nueva Reserva", true, true, false, true);
+        this(null); // Llama al constructor con parámetro con null
+    }
+
+    public NuevaReserva(Integer idReserva) {
+        //super("Nueva Reserva", true, true, false, true);
+        super(idReserva == null ? "Nueva Reserva" : "Modificar Reserva",
+                true, true, false, true);
         initComponents();
+        this.controlador = new NuevaReservaControlador(this, Singleton.getInstancia().getConexion(), idReserva);
+
+
+        // Verifica si los JComboBox están inicializados correctamente
+        System.out.println("ComboBox1: " + getjComboBox1());  // Verifica que no sea null
+        System.out.println("ComboBox2: " + getjComboBox2());  // Verifica que no sea null
+
+        // Agregar el listener para el cambio de tamaño y calidad
+        getjComboBox1().addActionListener(evt -> controlador.actualizarPrecio());
+        getjComboBox2().addActionListener(evt -> controlador.actualizarPrecio());
+
+        // Agregar el listener para el cambio de fechas
+        getDateEntrada().getDateEditor().addPropertyChangeListener(evt -> controlador.actualizarPrecio());
+        getDateSalida().getDateEditor().addPropertyChangeListener(evt -> controlador.actualizarPrecio());
+
+        // Agregar los listeners para el cambio de servicios
+        cheeckLimpieza.addItemListener(evt -> controlador.actualizarPrecioServicios());
+        checkBuffet.addItemListener(evt -> controlador.actualizarPrecioServicios());
+        checkWiFi.addItemListener(evt -> controlador.actualizarPrecioServicios());
+        checkSpa.addItemListener(evt -> controlador.actualizarPrecioServicios());
+        checkServiHabita.addItemListener(evt -> controlador.actualizarPrecioServicios());
     }
 
     /**
@@ -49,6 +95,12 @@ public class NuevaReserva extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         labelPrecio = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        interTamanho = new javax.swing.JLabel();
+        interTipoH = new javax.swing.JLabel();
+        interFechaEn = new javax.swing.JLabel();
+        interFechSal = new javax.swing.JLabel();
+        interServicios = new javax.swing.JLabel();
+        interPrecio = new javax.swing.JLabel();
 
         jLabel1.setText("Tamaño habitación");
 
@@ -59,10 +111,6 @@ public class NuevaReserva extends javax.swing.JInternalFrame {
         jLabel4.setText("Fecha entrada");
 
         jLabel5.setText("Fecha salida");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         cheeckLimpieza.setText("Limpieza diaria");
 
@@ -87,6 +135,24 @@ public class NuevaReserva extends javax.swing.JInternalFrame {
 
         jLabel7.setText("€");
 
+        interTamanho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/interrogante.png"))); // NOI18N
+        interTamanho.setToolTipText("APARTADO OBLIGATORIO. | \nHabitación Pequeña -> 1 cama | \nHabitación Mediana -> 2 camas | \nHabitación Grande -> 1 cama matrimonio");
+
+        interTipoH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/interrogante.png"))); // NOI18N
+        interTipoH.setToolTipText("CAMPO OBLIGATORIO | \nHabitación Económica -> 20 - 35 € | \nHabitación Estándar -> 25 - 40 € | \nHabitación Lujo -> 40 - 120 € | \nHabitación Suite ->150 - 180 €");
+
+        interFechaEn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/interrogante.png"))); // NOI18N
+        interFechaEn.setToolTipText("CAMPO OBLIGATORIO | \nMarque la fecha en la que llegará al hotel | \nSe pueden hacer registros en el loby a cualquier hora del día");
+
+        interFechSal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/interrogante.png"))); // NOI18N
+        interFechSal.setToolTipText("CAMPO OBLIGATORIO | \nMarcar la fecha en la que dejarás de ospedarte en el hotel | \nLa entrega de las llaves solo se acepta hasta las 12 de la mañana, si no están entregadas a las 12 de la mañana se pagará compensación.");
+
+        interServicios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/interrogante.png"))); // NOI18N
+        interServicios.setToolTipText("CAMPO OPCIONAL | \nLimpieza diaria -> 10€ | \nComida buffet -> 10€ | \nWi-Fi -> 1€ | \nSpa y masajes -> 25€ | \nServicio de habitación -> 15€ ");
+
+        interPrecio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/interrogante.png"))); // NOI18N
+        interPrecio.setToolTipText("Aquí se muestra el precio de la reserva | \nPresione el botón que pone \"Reservar\" si está conforme con los aparatados seleccionados | \nSi no está conforme revise los apartados seleccionados.");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,10 +160,11 @@ public class NuevaReserva extends javax.swing.JInternalFrame {
             .addComponent(jSeparator1)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator2)
+                    .addComponent(jSeparator3)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator2)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel3)
@@ -119,52 +186,78 @@ public class NuevaReserva extends javax.swing.JInternalFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(BtnReservar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4))
-                                .addGap(34, 34, 34)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(dateSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(dateEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addComponent(jSeparator3))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(interTipoH, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(interTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(interServicios, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(22, 22, 22))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(labelPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(interPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(25, 25, 25)))))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6)
-                .addGap(18, 18, 18)
-                .addComponent(labelPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel4))
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(dateSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(interFechSal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(dateEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(interFechaEn, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(dateEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(dateSalida, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(interTamanho))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(interTipoH))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(dateEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(interFechaEn))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(dateSalida, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(interFechSal, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(19, 19, 19)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(interServicios)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cheeckLimpieza)
@@ -181,7 +274,8 @@ public class NuevaReserva extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(labelPrecio)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(interPrecio))
                 .addGap(20, 20, 20)
                 .addComponent(BtnReservar)
                 .addGap(19, 19, 19))
@@ -192,7 +286,82 @@ public class NuevaReserva extends javax.swing.JInternalFrame {
 
     private void BtnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReservarActionPerformed
         // TODO add your handling code here:
+        boolean reservaExitosa = controlador.hacerReserva();
+        if (reservaExitosa){
+            this.dispose();
+        }
     }//GEN-LAST:event_BtnReservarActionPerformed
+
+    // Método getter para el ComboBox de tamaños
+    public JComboBox<String> getjComboBox1() {
+        return jComboBox1;
+    }
+
+    // Método getter para el ComboBox de calidades
+    public JComboBox<String> getjComboBox2() {
+        return jComboBox2;
+    }
+
+    public JButton getBtnReservar() {
+        return BtnReservar;
+    }
+
+    public com.toedter.calendar.JDateChooser getDateEntrada() {
+        return dateEntrada;
+    }
+
+    public com.toedter.calendar.JDateChooser getDateSalida(){
+        return dateSalida;
+    }
+
+    public JCheckBox getCheckLimpieza() {
+        return cheeckLimpieza;
+    }
+
+    public JCheckBox getCheckBuffet() {
+        return checkBuffet;
+    }
+
+    public JCheckBox getCheckWiFi() {
+        return checkWiFi;
+    }
+
+    public JCheckBox getCheckSpa() {
+        return checkSpa;
+    }
+
+    public JCheckBox getCheckServiHabita() {
+        return checkServiHabita;
+    }
+
+    public JLabel getLabelPrecio() {
+        return labelPrecio;
+    }
+
+    public LocalDate getFechaEntrada() {
+        // Convierte la fecha de entrada del JDateChooser a LocalDate
+        return dateEntrada.getDate() != null ? dateEntrada.getDate().toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate() : null;
+    }
+
+    public LocalDate getFechaSalida() {
+        // Convierte la fecha de salida del JDateChooser a LocalDate
+        return dateSalida.getDate() != null ? dateSalida.getDate().toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate() : null;
+    }
+
+    public List<Integer> getServiciosSeleccionados() {
+        List<Integer> serviciosSeleccionados = new ArrayList<>();
+
+        // Comprobamos si las casillas de verificación están seleccionadas y las agregamos a la lista
+        if (cheeckLimpieza.isSelected()) serviciosSeleccionados.add(1); // Asumimos que "1" es el ID para el servicio de limpieza
+        if (checkBuffet.isSelected()) serviciosSeleccionados.add(2);  // Asumimos que "2" es el ID para el servicio de buffet
+        if (checkWiFi.isSelected()) serviciosSeleccionados.add(3);    // Asumimos que "3" es el ID para el servicio de Wi-Fi
+        if (checkSpa.isSelected()) serviciosSeleccionados.add(4);     // Asumimos que "4" es el ID para el servicio de spa
+        if (checkServiHabita.isSelected()) serviciosSeleccionados.add(5); // Asumimos que "5" es el ID para el servicio de habitación
+
+        return serviciosSeleccionados;
+    }
+
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -205,6 +374,12 @@ public class NuevaReserva extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox cheeckLimpieza;
     private com.toedter.calendar.JDateChooser dateEntrada;
     private com.toedter.calendar.JDateChooser dateSalida;
+    private javax.swing.JLabel interFechSal;
+    private javax.swing.JLabel interFechaEn;
+    private javax.swing.JLabel interPrecio;
+    private javax.swing.JLabel interServicios;
+    private javax.swing.JLabel interTamanho;
+    private javax.swing.JLabel interTipoH;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
