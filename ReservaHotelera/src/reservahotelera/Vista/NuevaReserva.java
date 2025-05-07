@@ -102,6 +102,10 @@ public class NuevaReserva extends javax.swing.JInternalFrame {
         interServicios = new javax.swing.JLabel();
         interPrecio = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 153));
+        setBorder(null);
+        setForeground(new java.awt.Color(255, 255, 51));
+
         jLabel1.setText("Tamaño habitación");
 
         jLabel2.setText("Tipo habitación");
@@ -222,7 +226,7 @@ public class NuevaReserva extends javax.swing.JInternalFrame {
                         .addComponent(dateEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(interFechaEn, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,7 +250,7 @@ public class NuevaReserva extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4)
                             .addComponent(dateEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(interFechaEn))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(dateSalida, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -271,11 +275,12 @@ public class NuevaReserva extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(labelPrecio)
-                    .addComponent(jLabel7)
-                    .addComponent(interPrecio))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(interPrecio)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(labelPrecio)
+                        .addComponent(jLabel7)))
                 .addGap(20, 20, 20)
                 .addComponent(BtnReservar)
                 .addGap(19, 19, 19))

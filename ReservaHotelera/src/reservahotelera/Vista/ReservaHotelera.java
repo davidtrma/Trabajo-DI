@@ -35,6 +35,7 @@ public class ReservaHotelera extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jDesktopPane1 = new javax.swing.JDesktopPane();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -56,18 +57,24 @@ public class ReservaHotelera extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inicio Sesion");
 
-        jDesktopPane1.setBackground(new java.awt.Color(153, 204, 255));
+        jDesktopPane1.setBackground(new java.awt.Color(255, 255, 102));
         jDesktopPane1.setEnabled(false);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/LogoHotel.png"))); // NOI18N
+
+        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1225, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jMenu4.setText("Sesión");
@@ -90,6 +97,7 @@ public class ReservaHotelera extends javax.swing.JFrame {
         jMenu5.setText("Reserva");
         jMenu5.setToolTipText("Reserva");
 
+        MenuBarNuevaReserva.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
         MenuBarNuevaReserva.setText("Reservar");
         MenuBarNuevaReserva.setToolTipText("Reserva");
         MenuBarNuevaReserva.addActionListener(new java.awt.event.ActionListener() {
@@ -99,6 +107,7 @@ public class ReservaHotelera extends javax.swing.JFrame {
         });
         jMenu5.add(MenuBarNuevaReserva);
 
+        MenuBarConsultaReservas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
         MenuBarConsultaReservas.setText("Consultar Reservas");
         MenuBarConsultaReservas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,6 +155,9 @@ public class ReservaHotelera extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
+        Ayuda ventanaAyuda = new Ayuda();
+        jDesktopPane1.add(ventanaAyuda);
+        ventanaAyuda.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void MenuBarNuevaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBarNuevaReservaActionPerformed
@@ -173,6 +185,7 @@ public class ReservaHotelera extends javax.swing.JFrame {
        mostrarReservas.setVisible(true);
     }//GEN-LAST:event_MenuBarConsultaReservasActionPerformed
 
+        
     /**
      * @param args the command line arguments
      */
@@ -210,11 +223,14 @@ public class ReservaHotelera extends javax.swing.JFrame {
             }
         });
     }
+    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem MenuBarConsultaReservas;
     private javax.swing.JMenuItem MenuBarNuevaReserva;
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
