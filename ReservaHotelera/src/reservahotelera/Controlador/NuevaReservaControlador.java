@@ -31,10 +31,20 @@ public class NuevaReservaControlador {
         this.idReservaActual = idReserva;
        // this.iniciarVista(); // Cargar los tamaños y calidades al iniciar la vista
 
+
+        /*
         if (idReserva != null){
             cargarDatosReservaExistente(idReserva);
         }else {
             iniciarVista();
+        }*/
+
+        // Siempre iniciar ComboBox primero
+        iniciarVista();  // Cargar los tamaños y calidades al iniciar la vista
+
+        // Después cargar datos si hay una reserva existente
+        if (idReserva != null){
+            cargarDatosReservaExistente(idReserva);
         }
 
     }
@@ -64,6 +74,7 @@ public class NuevaReservaControlador {
 
             // Actualizar precio
             actualizarPrecio();
+            actualizarPrecioServicios();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -118,6 +129,8 @@ public class NuevaReservaControlador {
         // Actualizamos el precio en la vista
         double precioTotal = precioHabitacion + precioServicios; //Sumamos los servicios al precio de la habitación
         vista.getLabelPrecio().setText(String.format("%.2f", precioTotal)); // Mostrar 2 decimales
+
+
     }
 
     // Método para calcular el precio dinámicamente y actualizar el JLabel
